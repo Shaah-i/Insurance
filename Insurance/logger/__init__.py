@@ -4,7 +4,7 @@ import os
 
 LOG_DIR= "Insurance_log"
 
-CURRENT_TIME_STAMP= f"{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}"
+CURRENT_TIME_STAMP= f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
 
 LOG_FILE_NAME= f"log_{CURRENT_TIME_STAMP}.log"
 
