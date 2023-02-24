@@ -2,9 +2,9 @@ import pymongo
 import pandas as pd
 import json
 
-client = pymongo.MongoClient()
+client = pymongo.MongoClient("mongodb+srv://Shaah_i:1Caps1low@shaahi.ku1bjvf.mongodb.net/?retryWrites=true&w=majority")
 
-DATA_FILE_PATH = "G:\ML Study\DS practice\Insurance_premium\Insurance\insurance.csv"
+DATA_FILE_PATH = (r"G:\ML Study\DS practice\Insurance_premium\Insurance\insurance.csv")
 
 DATABASE_NAME = "INSURANCE"
 COLLECTION_NAME = "INSURANCE_PROJECT"
