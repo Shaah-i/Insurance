@@ -21,7 +21,7 @@ class DataIngestion: # data divide train, test & validate
         try:
             lg.info(f"Export collection data as pandas dataframe")
             df:pd.DataFrame = utils.get_collection_as_dataframe(database_name= self.data_ingestion_config.datbase_name, collection_name= self.data_ingestion_config.collection_name)
-            lg.info(f"Save data in future store")
+            lg.info(f"Save data in feature store")
             
             # replace Na wit NAN
             df.replace(to_replace = "na", value= np.NAN, inplace = True)
@@ -51,6 +51,9 @@ class DataIngestion: # data divide train, test & validate
                 feature_store_file_path= self.data_ingestion_config.feature_store_file_path,
                 train_file_path= self.data_ingestion_config.train_file_path,
                 test_file_path= self.data_ingestion_config.test_file_path)
+            
+            lg.info(f"Data ingestion artifact: {data_ingestion_artifact}")
+            return data_ingestion_artifact
 
         except Exception as e:
             raise InsuranceException(error_message= e, error_detail=sys)
