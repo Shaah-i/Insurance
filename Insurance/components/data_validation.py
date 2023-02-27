@@ -23,7 +23,7 @@ class DataValidation:
             data_validation_config: config_entity.DataValidationConfig,
             data_ingestion_artifact: artifact_entity.DataIngestionArtifact):
         try:
-            lg.info(f"{'>>'*20} | ** -- Data Validation -- ** | {'<<'*20}")
+            lg.info(f"{'**'*10} | ** -- Data Validation -- ** | {'**'*10}")
             self.data_validation_config= data_validation_config
             self.data_ingestion_artifact= data_ingestion_artifact
             self.validation_error = dict()
@@ -130,7 +130,7 @@ class DataValidation:
                 self.data_drift(base_df=base_df, current_df=test_df, report_key_name="data_drift_within_test_dataset")
           
             #write the report
-            lg.info("Write reprt in yaml file")
+            lg.info("Write report in yaml file")
             utils.write_yaml_file(file_path=self.data_validation_config.report_file_path, data=self.validation_error)
 
             data_validation_artifact = artifact_entity.DataValidationArtifact(report_file_path=self.data_validation_config.report_file_path,)

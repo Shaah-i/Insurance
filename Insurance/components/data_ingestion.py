@@ -13,6 +13,7 @@ from Insurance.logger import lg
 class DataIngestion: # data divide train, test & validate
     def __init__(self, data_ingestion_config: config_entity.DataIngestionConfig):
         try:
+            lg.info(f"{'**'*10} | ** -- Data Ingestion -- ** | {'**'*10}")
             self.data_ingestion_config = data_ingestion_config
         except Exception as e:
             raise InsuranceException(e, sys)
