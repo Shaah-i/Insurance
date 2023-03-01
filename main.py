@@ -8,6 +8,8 @@ from Insurance.entity.config_entity import DataIngestionConfig
 from Insurance.components.data_ingestion import DataIngestion
 from Insurance.components.data_validation import DataValidation
 from Insurance.components.data_transformation import DataTransformation
+from Insurance.components.model_trainer import ModelTrainer
+from Insurance.components.model_evaluation import ModelEvaluation
 
 # def test_logger_and_exception():
 #     try:
@@ -42,9 +44,19 @@ if __name__== "__main__":
         data_validation_artifact = data_validation.initiate_data_validation()
 
         ## Data transformation
-        data_tranformation_config= config_entity.DataTransformationConfig(training_pipeline_config= training_pipeline_config)
-        data_tranformation = DataTransformation(data_tarnsformation_config= data_tranformation_config, data_ingestion_artifact= data_ingestion_artifact)
-        data_transformation_artifact = data_tranformation.initiate_data_transformation()
+        data_transformation_config= config_entity.DataTransformationConfig(training_pipeline_config= training_pipeline_config)
+        data_transformation = DataTransformation(data_transformation_config= data_transformation_config, data_ingestion_artifact= data_ingestion_artifact)
+        data_transformation_artifact = data_transformation.initiate_data_transformation()
+
+        ## Model trainer
+        model_trainer_config = config_entity.ModelTrainerConfig(training_pipeline_config= training_pipeline_config)
+        model_trainer = ModelTrainer(model_trainer_config= model_trainer_config, data_transformation_artifact= data_transformation_artifact)
+        model_trainer_artifact= model_trainer.initiate_model_trainer()
+
+        ## Model evaluation
+        model_evaluation_config = config_entity.ModelEvaluationConfig(training_pipeline_config= training_pipeline_config)
+        model_evaluation = ModelEvaluation(model_evaluation_config = model_evaluation_config, data_ingestion_artifact= data_ingestion_artifact, data_transformation_artifact= data_transformation_artifact, model_trainer_artifact= model_trainer_artifact)
+        model_eval_artifact = model_evaluation.initiate_model_evaluation()
 
     except Exception as e:
         print(e)
