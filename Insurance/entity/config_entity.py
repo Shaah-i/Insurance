@@ -72,7 +72,8 @@ class ModelTrainerConfig:
     def __init__(self, training_pipeline_config: TrainingPipelineConfig):
         try:
             self.model_trainer_dir = os.path.join(training_pipeline_config.artifact_dir, "model_trainer")
-            self.model_path = os.path.join(self.model_trainer_dir, "model", MODEL_FILE_NAME)
+            # self.model_path = os.path.join(self.model_trainer_dir, "model", MODEL_FILE_NAME)
+            self.model_path = os.path.join(self.model_trainer_dir, MODEL_FILE_NAME)
             self.expected_accuracy= 0.7
             self.overfitting_threshold= 0.3
         except Exception as e:
@@ -83,4 +84,17 @@ class ModelEvaluationConfig:
          try:
               self.change_threshold= 0.01
          except Exception as e:
+                    raise InsuranceException(e, sys)
+         
+
+class ModelPusherConfig:
+     def __init__(self, training_pipeline_config: TrainingPipelineConfig):
+          try:
+               self.model_pusher_dir = os.path.join(training_pipeline_config.artifact_dir, "model_pusher")
+               self.saved_model_dir = os.path.join("saved_models")
+               self.pusher_model_dir = os.path.join(self.model_pusher_dir, "saved_models")
+               self.pusher_model_path = os.path.join(self.pusher_model_dir, MODEL_FILE_NAME)
+               self.pusher_transformer_path = os.path.join(self.pusher_model_dir, TRANSFORMER_OBJECT_FILE_NAME)
+               self.pusher_target_encoder_path = os.path.join(self.pusher_model_dir, TARGET_ENCODER_OBJECT_FILE_NAME)
+          except Exception as e:
                     raise InsuranceException(e, sys)
