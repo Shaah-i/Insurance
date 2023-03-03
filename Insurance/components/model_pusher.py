@@ -17,7 +17,7 @@ from Insurance.entity.artifact_entity import DataTransformationArtifact, ModelTr
 from Insurance.entity.config_entity import ModelPusherConfig
 from Insurance.predictor import ModelResolver
 
-class ModlePusher:
+class ModelPusher:
     def __init__(self, model_pusher_config: ModelPusherConfig, data_transformation_artifact: DataTransformationArtifact, model_trainer_artifact: ModelTrainerArtifact):
         try:
             lg.info(f"{'**'*10} | ** -- Model Pusher -- ** | {'**'*10}")
@@ -47,7 +47,7 @@ class ModlePusher:
             target_encoder_path = self.model_resolver.get_latest_save_target_encoder_path()
 
             save_object(file_path= transform_path, obj= transformer)
-            save_object(file_path= model_path, obj= model_path)
+            save_object(file_path= model_path, obj= model)
             save_object(file_path= target_encoder_path, obj= target_encoder)
 
             model_pusher_artifact= ModelPusherArtifact(pusher_model_dir= self.model_pusher_config.pusher_model_dir, saved_model_dir= self.model_pusher_config.saved_model_dir)

@@ -51,9 +51,9 @@ class ModelEvaluation:
             # model = load_object(file_path= model_path)
             target_encoder= load_object(file_path= target_encoder_path)
 
-            print(transformer_path, transformer)
-            print(model_path, model)
-            print(target_encoder_path, target_encoder)
+            # print(transformer_path, transformer)
+            # print(model_path, model)
+            # print(target_encoder_path, target_encoder)
 
             # for new model
             current_transformer = load_object(file_path= self.data_transformation_artifact.transform_object_path)
@@ -67,6 +67,7 @@ class ModelEvaluation:
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
             target_df = test_df[TARGET_COLUMN]
             y_true = target_df
+            
             
             # Accuracy previous model
             input_feature_name = list(transformer.feature_names_in_)
